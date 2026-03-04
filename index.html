@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Siddhi x Forever ❤️</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        :root { --neon: #ff0055; --bg: #000000; }
+        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { background: var(--bg); color: white; font-family: 'Inter', sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; margin: 0; overflow: hidden; }
+        .container { width: 100%; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; text-align: center; }
+        .screen { display: none; width: 100%; max-width: 400px; }
+        .active { display: block; animation: powerIn 0.5s cubic-bezier(0.23, 1, 0.32, 1); }
+        @keyframes powerIn { from { opacity: 0; transform: scale(0.9) translateY(20px); filter: blur(10px); } to { opacity: 1; transform: scale(1) translateY(0); filter: blur(0); } }
+        
+        h2 { font-weight: 900; font-size: 2.8rem; margin-bottom: 10px; text-transform: uppercase; color: var(--neon); letter-spacing: -2px; }
+        
+        /* Grid Fix for Perfect Alignment */
+        .photo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+        .photo-grid img { width: 100%; height: 140px; object-fit: cover; border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.2); }
+        
+        .main-img { width: 100%; border-radius: 24px; border: 2px solid white; margin-bottom: 20px; box-shadow: 0 0 25px rgba(255, 0, 85, 0.3); }
+        
+        button { width: 100%; padding: 22px; border-radius: 18px; border: none; font-weight: 900; font-size: 1.3rem; cursor: pointer; transition: 0.2s; text-transform: uppercase; margin-top: 10px; }
+        .btn-neon { background: var(--neon); color: white; box-shadow: 0 10px 25px rgba(255, 0, 85, 0.4); }
+        
+        #noBtn { background: #222; color: #666; width: auto; padding: 10px 25px; font-size: 0.9rem; margin-top: 35px; border-radius: 50px; display: inline-block; }
+        .type-container { min-height: 60px; color: #888; font-style: italic; line-height: 1.4; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div id="s1" class="screen active">
+            <h2>Pssst... Hey! 🌸</h2>
+            <img src="assets/cat1" class="main-img" style="height: 250px; object-fit: contain; border: none; background: #fff;">
+            <p>I stopped coding my assignments to build this just for you. Ready?</p>
+            <button class="btn-neon" onclick="next(2)">Let's see! ✨</button>
+        </div>
+
+        <div id="s2" class="screen">
+            <h2>Siddhi.</h2>
+            <img src="assets/siddhi_solo.jpg" class="main-img" style="height: 300px; object-fit: cover;">
+            <p>Every moment with you is my favorite notification.</p>
+            <button class="btn-neon" onclick="next(3)">Our Memories 📸</button>
+        </div>
+
+        <div id="s3" class="screen">
+            <h2>Our Story.</h2>
+            <div class="photo-grid">
+                <img src="assets/us1">
+                <img src="assets/us2">
+                <img src="assets/us3">
+                <img src="assets/us4">
+            </div>
+            <p>No more AI lines, just us.</p>
+            <button class="btn-neon" onclick="next(4)">Final Question 💍</button>
+        </div>
+
+        <div id="s4" class="screen">
+            <h2>Be Mine? ❤️</h2>
+            <img src="assets/cat3" class="main-img" style="border: none; background: transparent; box-shadow: none; height: 180px; object-fit: contain;">
+            <div id="typed" class="type-container"></div>
+            <button class="btn-neon" onclick="done()">YES ❤️</button>
+            <button id="noBtn" onmouseover="moveNo()" onclick="moveNo()">Nope</button>
+        </div>
+    </div>
+
+    <script>
+        function next(n) {
+            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+            document.getElementById('s'+n).classList.add('active');
+            if(n === 4) startTyping();
+        }
+
+        function moveNo() {
+            const b = document.getElementById('noBtn');
+            b.style.position = 'fixed';
+            b.style.left = Math.random() * 70 + 15 + '%';
+            b.style.top = Math.random() * 70 + 15 + '%';
+        }
+
+        function startTyping() {
+            const text = "Forget the Peter and Gwen cliches. I just want it to be you and me. Forever. Will you be mine?";
+            let i = 0;
+            const el = document.getElementById('typed');
+            el.innerHTML = "";
+            function type() {
+                if (i < text.length) {
+                    el.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, 45);
+                }
+            }
+            type();
+        }
+
+        function done() {
+            confetti({ particleCount: 250, spread: 80, origin: { y: 0.6 }, colors: ['#ff0055', '#ffffff'] });
+            document.querySelector('.container').innerHTML = "<h1 style='font-size: 5rem; color:#ff0055; font-weight:900;'>DONE. ❤️</h1><p>Check your WhatsApp, Siddhi!</p>";
+        }
+    </script>
+</body>
+</html>
